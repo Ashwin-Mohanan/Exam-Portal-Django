@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% extends 'testapp/home.html' %}
+{%block body%}
+<h3 class="heading">Welcome To Java Examinations</h3>
+<!-- <h6 align="center">Page:{{page.number}}</h6> -->
+
+<script>
+$(document).ready(function(){
+$("#b1").click(function(){
+        $(".rb").show();
+        $(".rb").attr("disabled",true);
+
+    });
+    });
+        function getans()
+        {
+            document.getElementById("UserAnswers").innerHTML ="";
+            var e =document.getElementsByTagName("input");
+            for(i=0;i<=e.length;i++)
+            {
+                if(e[i].type=="radio")
+                {
+                    if(e[i].checked)
+                    document.getElementById("UserAnswers").innerHTML+="Q"+e[i].name+'The Ans you selected is: ' +e[i].value+"<br>";
+                }
+            }
+        }
+</script>
+<form method="POST">
+    {%csrf_token%}
+    <table class="table">
+        {%for q in list%}
+       
+        <tr>
+            <td style="color: rgb(192, 196, 4);">{{q.id}} ) {{q.Qta1}}</td>
+        </tr>
+        
+        <tr>
+            <td><input class="rb" type="radio" id="{{q.op1}}" name="que{{q.id}}" value="{{q.op1}}">{{q.op1}}</td>
+        </tr>
+        
+        <tr>
+            <td><input class="rb" type="radio" id="{{q.op2}}" name="que{{q.id}}" value="{{q.op2}}">{{q.op2}}</td>
+        </tr>
+        
+        <tr>
+            <td><input class="rb" type="radio" id="{{q.op3}}" name="que{{q.id}}" value="{{q.op3}}">{{q.op3}}</td>
+        </tr>
+        
+        <tr>
+            <td><input class="rb" type="radio" id="{{q.op4}}" name="que{{q.id}}" value="{{q.op4}}">{{q.op4}}</td>
+        </tr>
+        <tr>
+            <td><label id="corans" class="rb" style="display: none ; color: green;" for="{{q.correctop}}"><b>{{q.correctop}}</b></label></td>
+        </tr>
+        
+        {%endfor%}
+        
+    </table>
+    <input type="submit " name="Submit" id="b1"class="btn btn-success" value="Submit" onclick="getans()">
+    <br>
+    <b id="UserAnswers"></b>
+    
+
+    <!-- <div id="butt">
+        {% if page.has_previous %}      
+        <a href="{% url 'python'%}?page={{page.previous_page_number }} " class="btn btn-primary">Previous</a>
+        {% endif %}
+
+        {% if page.has_next %}
+        <a href="{% url 'python'%}?page={{page.next_page_number }}" class="btn btn-primary">Next</a>
+        {% endif %}
+    </div> -->
+
+
+
+
+</form>
+{%endblock%}
