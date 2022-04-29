@@ -1,0 +1,16 @@
+body{
+    background-color: #3A3E59;
+    color: #FFB567;
+}
+nav{
+    color: #FFB567;
+}
+.table{
+    color: #FFB567;
+}
+.left{
+    text-align: right;
+}
+#butt{
+    padding-top: 5vh;
+}
